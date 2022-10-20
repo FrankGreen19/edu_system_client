@@ -1,6 +1,5 @@
 <template>
-  <v-container fluid>
-    <v-footer
+  <v-footer
         color="primary lighten-1"
         padless
         rounded
@@ -27,7 +26,6 @@
         </v-col>
       </v-row>
     </v-footer>
-  </v-container>
 </template>
 
 <script>
