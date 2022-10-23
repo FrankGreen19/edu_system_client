@@ -1,4 +1,4 @@
-import {userAPI} from "@/api/userAPI";
+import {userAPI} from "@/api/modules/userAPI";
 
 export default {
     state: {

@@ -1,4 +1,4 @@
-import {LoginApiInstance} from "@/api/index";
+import {LoginApiInstance} from "@/api";
 
 export const authAPI = {
     login(email, password)

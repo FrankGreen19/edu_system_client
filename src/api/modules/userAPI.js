@@ -1,4 +1,4 @@
-import {DefaultApiInstance} from "@/api/index";
+import {DefaultApiInstance} from "@/api";
 
 export const userAPI = {
     getUser()

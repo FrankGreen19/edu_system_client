@@ -1,4 +1,4 @@
-import {authAPI} from "@/api/authAPI";
+import {authAPI} from "@/api/modules/authAPI";
 
 export default {
     state: {
