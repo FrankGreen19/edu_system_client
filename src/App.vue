@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-container fluid>
-      <NavbarBlock />
+      <HeaderBlock />
       <router-view />
       <FooterBlock />
     </v-container>
@@ -10,12 +10,13 @@
 
 <script>
 
-import NavbarBlock from "@/components/NavbarBlock";
+import HeaderBlock from "@/components/HeaderBlock";
 import FooterBlock from "@/components/FooterBlock";
 
 export default {
   name: 'App',
   components: {
+    HeaderBlock,
     FooterBlock,
     NavbarBlock
   }
