@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import LoginPage from "@/pages/LoginPage";
+import MainPage from "@/pages/MainPage";
 
 Vue.use(VueRouter)
 
@@ -9,7 +10,10 @@ let router = new VueRouter({
     routes: [
         {
             path: '/',
-            component: LoginPage
+            component: MainPage,
+            meta: {
+                requiresAuth: true
+            }
         },
         {
             path: '/login',
@@ -26,33 +30,28 @@ let router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    if(to.matched.some(record => record.meta.requiresAuth)) {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
         if (localStorage.getItem('token') == null) {
             next({
-                path: '/',
+                path: '/login',
                 params: { nextUrl: to.fullPath }
             })
         } else {
+            // // проверка роли
             // let user = JSON.parse(this.$store.getters.user)
-            // if(to.matched.some(record => record.meta.is_admin)) {
+            //
+            // if (to.matched.some(record => record.meta.is_admin)) {
             //     if(user.roles.ROLE_ADMIN){
             //         next()
             //     } else{
             //         next({ name: 'userboard'})
             //     }
-            // }else {
+            // } else {
             //     next()
             // }
             next()
         }
-    } else if(to.matched.some(record => record.meta.guest)) {
-        if(localStorage.getItem('jwt') == null){
-            next()
-        }
-        else{
-            next({ path: '/'})
-        }
-    }else {
+    } else {
         next()
     }
 })
