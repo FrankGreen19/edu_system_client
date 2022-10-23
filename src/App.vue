@@ -1,8 +1,10 @@
 <template>
   <v-app>
-    <NavbarBlock />
-    <router-view />
-    <FooterBlock />
+    <v-container fluid>
+      <NavbarBlock />
+      <router-view />
+      <FooterBlock />
+    </v-container>
   </v-app>
 </template>
 
