@@ -3,6 +3,7 @@
         color="primary lighten-1"
         padless
         rounded
+        absolute
     >
       <v-row
           justify="center"
