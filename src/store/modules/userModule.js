@@ -33,7 +33,7 @@ export default {
         }
     }, // аналоги computed свойств
     actions: {
-        getUser({commit})
+        fetchUser({commit})
         {
             return userAPI.getUser().then((response) => {
                 console.log(response.data)
