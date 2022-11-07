@@ -7,7 +7,7 @@ const defaultConfig = {
     headers: {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('token')
-            ? `Bearer ${localStorage.getItem('token')}`
+            ? localStorage.getItem('token')
             : null
     }
 }
