@@ -2,13 +2,14 @@
   <div>
     <p>{{ title }}</p>
     <v-radio-group
-        v-model="model"
+        :value="value"
+        @change="$emit('input', $event)"
         light
         row
     >
       <v-radio
           v-for="item in items"
-          v-bind:key="item.id"
+          :key="item.id"
           color="blue"
           :label="item.title"
           :value="item.id"
@@ -20,14 +21,6 @@
 <script>
 export default {
   name: "RadioGroup",
-
-  created() {
-    this.model = this.value;
-  },
-
-  data: () => ({
-    model: null,
-  }),
 
   props: {
     items: {
@@ -43,12 +36,6 @@ export default {
       required: true
     },
   },
-
-  watch: {
-    model(value) {
-      this.$emit('input', value);
-    }
-  }
 }
 </script>
 
