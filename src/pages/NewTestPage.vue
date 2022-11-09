@@ -30,6 +30,7 @@
                 hint="Количество вопросов"
                 v-model="test.questions_number"/>
           </div>
+          <DatePicker title="Дедлайн" v-model="test.finish_date"/>
         </v-card-text>
       </v-card>
     </v-col>
@@ -40,19 +41,16 @@
 import {mapActions, mapGetters} from "vuex";
 import RadioGroup from "@/components/UI/RadioGroup";
 import {TEST_UTILS} from '@/utils/testUtils';
+import DatePicker from "@/components/UI/DatePicker";
 
 export default {
   name: "NewTestPage",
 
-  components: {RadioGroup},
+  components: {DatePicker, RadioGroup},
 
   data: () => ({
     TEST_UTILS,
     question_category_radio: 0,
-    question_category_radios: [
-      {id: 1, title: 'Общая'},
-      {id: 2, title: 'Собственная'}
-    ],
     question_category_id: null,
     test_type_generated: 18,
     test_type_custom: 17,
@@ -61,6 +59,7 @@ export default {
       test_theme: '',
       title: '',
       questions_number: '',
+      finish_date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
     }
   }),
 

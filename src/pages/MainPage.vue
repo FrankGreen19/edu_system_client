@@ -1,5 +1,9 @@
 <template>
-  <p>sdfdsfsd</p>
+  <div class="pb-10">
+    <v-btn @click="$router.push('/new-test')">
+      Создать тест
+    </v-btn>
+  </div>
 </template>
 
 <script>
