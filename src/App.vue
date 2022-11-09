@@ -12,13 +12,18 @@
 
 import HeaderBlock from "@/components/HeaderBlock";
 import FooterBlock from "@/components/FooterBlock";
-
 export default {
   name: 'App',
   components: {
     HeaderBlock,
     FooterBlock,
-    NavbarBlock
+  },
+
+  mounted() {
+    // if (localStorage.getItem('token') && this.$store.getters.getUser == null) {
+    //   console.log('yes')
+    //   this.$store.dispatch('fetchUser');
+    // }
   }
 }
 </script>
