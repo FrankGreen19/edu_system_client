@@ -6,7 +6,15 @@ export const testAPI = {
         return DefaultApiInstance.get('/test-type');
     },
 
-    getQuestionCategories(catType) {
+    getQuestionCategories(catType)
+    {
         return DefaultApiInstance.get(`/question-category/${catType}`)
     },
+
+    getQuestionsByCategoryId(catId)
+    {
+        return DefaultApiInstance.post('/question', {
+            questionCategoryId: catId
+        });
+    }
 }

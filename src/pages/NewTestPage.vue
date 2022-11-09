@@ -18,6 +18,8 @@
                 item-text="title"
                 item-value="id"
                 solo
+                v-model="question_category_id"
+                @change="fetchQuestionsByCategory({question_category_id})"
             ></v-select>
           </div>
           <div v-if="test.test_type_id === test_type_generated">
@@ -65,16 +67,17 @@ export default {
   },
 
   methods: {
-    ...mapActions(['fetchTestTypes', 'fetchQuestionCategories']),
+    ...mapActions(['fetchTestTypes', 'fetchQuestionCategories', 'fetchQuestionsByCategory']),
 
-    getQuestionCategoriesByRadioValue() {
+    getQuestionCategoriesByRadioValue()
+    {
       switch (this.question_category_radio) {
         case 1:
           return this.getCommonQuestionCategories
         case 2:
           return this.getAuthoredQuestionCategories
       }
-    }
+    },
   },
 
   computed: {

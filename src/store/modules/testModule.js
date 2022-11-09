@@ -7,36 +7,50 @@ export default {
             common: [],
             authored: [],
         },
+        questions: [],
     },
 
     mutations: {
-        setTestTypes(state, testTypes) {
+        setTestTypes(state, testTypes)
+        {
             state.testTypes = testTypes;
         },
 
-        setCommonQuestionCategories(state, cats) {
+        setCommonQuestionCategories(state, cats)
+        {
             state.questionCategories.common = cats;
         },
 
-        setAuthoredQuestionCategories(state, cats) {
+        setAuthoredQuestionCategories(state, cats)
+        {
             state.questionCategories.authored = cats;
         },
+
+        setQuestions(state, questions) {
+            state.questions = questions;
+        }
     },
 
     getters: {
-        getTestTypes(state) {
+        getTestTypes(state)
+        {
             return state.testTypes;
         },
 
-        getCommonQuestionCategories(state) {
-            console.log(state.questionCategories)
+        getCommonQuestionCategories(state)
+        {
             return state.questionCategories.common;
         },
 
-        getAuthoredQuestionCategories(state) {
-            console.log(state.questionCategories)
+        getAuthoredQuestionCategories(state)
+        {
             return state.questionCategories.authored;
         },
+
+        getQuestions(state)
+        {
+            return state.questions;
+        }
     },
 
     actions: {
@@ -55,6 +69,13 @@ export default {
                 testAPI.getQuestionCategories('authored').then((response) => {
                     commit('setAuthoredQuestionCategories', response.data.questionCategoryResources)
                 });
+            })
+        },
+
+        fetchQuestionsByCategory({commit}, {question_category_id})
+        {
+            return testAPI.getQuestionsByCategoryId(question_category_id).then((response) => {
+                commit('setQuestions', response.data.questionResources);
             })
         }
     }
