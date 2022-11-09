@@ -8,7 +8,7 @@
               label="Название"
               hint="Название"
               v-model="test.title"/>
-          <RadioGroup :items="TEST_UTILS.QUESTION_CATEGORY_RADIOS" title="Из какой категории будем брать вопросы?"
+          <RadioGroup :items="test_utils.question_categories_radios" title="Из какой категории будем брать вопросы?"
                       v-model="question_category_radio"/>
           <RadioGroup :items="getTestTypes" title="Как будем создавать тест?" v-model="test.test_type_id"/>
           <div v-if="question_category_radio !== 0">
@@ -23,7 +23,7 @@
                 @change="fetchQuestionsByCategory({question_category_id})"
             ></v-select>
           </div>
-          <div v-if="test.test_type_id === TEST_UTILS.TEST_TYPES.GENERATED">
+          <div v-if="test.test_type_id === test_utils.test_types.generated">
             <v-text-field
                 solo
                 label="Количество вопросов"
@@ -37,6 +37,9 @@
               hint="Время на выполнение (в минутах)"
               v-model="test.execution_time"/>
         </v-card-text>
+        <div v-if="test.test_type_id === test_utils.test_types.custom">
+
+        </div>
       </v-card>
     </v-col>
   </v-row>
@@ -45,7 +48,7 @@
 <script>
 import {mapActions, mapGetters} from "vuex";
 import RadioGroup from "@/components/UI/RadioGroup";
-import {TEST_UTILS} from '@/utils/testUtils';
+import {test_utils} from '@/utils/testUtils';
 import DatePicker from "@/components/UI/DatePicker";
 
 export default {
@@ -54,7 +57,7 @@ export default {
   components: {DatePicker, RadioGroup},
 
   data: () => ({
-    TEST_UTILS,
+    test_utils,
     question_category_radio: 0,
     question_category_id: null,
     test_type_generated: 18,

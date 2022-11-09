@@ -1,9 +1,9 @@
-export const TEST_UTILS = {
-    TEST_TYPES: {
-        GENERATED: 18,
-        CUSTOM: 17,
+export const test_utils = {
+    test_types: {
+        generated: 18,
+        custom: 17,
     },
-    QUESTION_CATEGORY_RADIOS: [
+    question_categories_radios: [
         {id: 1, title: 'Общая'},
         {id: 2, title: 'Собственная'}
     ],
