@@ -31,6 +31,11 @@
                 v-model="test.questions_number"/>
           </div>
           <DatePicker title="Дедлайн" v-model="test.finish_date"/>
+          <v-text-field
+              solo
+              label="Время на выполнение (в минутах)"
+              hint="Время на выполнение (в минутах)"
+              v-model="test.execution_time"/>
         </v-card-text>
       </v-card>
     </v-col>
@@ -60,6 +65,7 @@ export default {
       title: '',
       questions_number: '',
       finish_date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+      execution_time: null,
     }
   }),
 
