@@ -8,7 +8,8 @@
               label="Название"
               hint="Название"
               v-model="test.title"/>
-          <RadioGroup :items="question_category_radios" title="Из какой категории будем брать вопросы?" v-model="question_category_radio"/>
+          <RadioGroup :items="TEST_UTILS.QUESTION_CATEGORY_RADIOS" title="Из какой категории будем брать вопросы?"
+                      v-model="question_category_radio"/>
           <RadioGroup :items="getTestTypes" title="Как будем создавать тест?" v-model="test.test_type_id"/>
           <div v-if="question_category_radio !== 0">
             <v-select
@@ -22,7 +23,7 @@
                 @change="fetchQuestionsByCategory({question_category_id})"
             ></v-select>
           </div>
-          <div v-if="test.test_type_id === test_type_generated">
+          <div v-if="test.test_type_id === TEST_UTILS.TEST_TYPES.GENERATED">
             <v-text-field
                 solo
                 label="Количество вопросов"
@@ -37,7 +38,8 @@
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-import RadioGroup from "@/components/test/RadioGroup";
+import RadioGroup from "@/components/UI/RadioGroup";
+import {TEST_UTILS} from '@/utils/testUtils';
 
 export default {
   name: "NewTestPage",
@@ -45,6 +47,7 @@ export default {
   components: {RadioGroup},
 
   data: () => ({
+    TEST_UTILS,
     question_category_radio: 0,
     question_category_radios: [
       {id: 1, title: 'Общая'},
