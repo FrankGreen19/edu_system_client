@@ -2,7 +2,7 @@
   <v-app>
     <v-container fluid>
       <HeaderBlock />
-      <router-view />
+      <router-view style="padding-bottom: 108px"/>
       <FooterBlock />
     </v-container>
   </v-app>
