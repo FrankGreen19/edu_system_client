@@ -39,6 +39,17 @@
           <div v-if="test.test_type_id === test_utils.test_types.custom">
             <CrazyMultipleSelect v-model="test.questions" :items="getQuestions" label="Выберете вопросы для теста"/>
           </div>
+
+          <div class="text-center">
+            <v-btn
+                class="my-2"
+                dark
+                rounded
+                value="Создать"
+                color="orange">
+              Создать
+            </v-btn>
+          </div>
         </v-card-text>
       </v-card>
     </v-col>
