@@ -38,10 +38,11 @@
               v-model="test.execution_time"/>
         </v-card-text>
         <div v-if="test.test_type_id === test_utils.test_types.custom">
-
+          <CrazyMultipleSelect v-model="test.questions" :items="getQuestions"/>
         </div>
       </v-card>
     </v-col>
+    <br><br><br><br><br>
   </v-row>
 </template>
 
@@ -50,11 +51,12 @@ import {mapActions, mapGetters} from "vuex";
 import RadioGroup from "@/components/UI/RadioGroup";
 import {test_utils} from '@/utils/testUtils';
 import DatePicker from "@/components/UI/DatePicker";
+import CrazyMultipleSelect from "@/components/UI/CrazyMultipleSelect";
 
 export default {
   name: "NewTestPage",
 
-  components: {DatePicker, RadioGroup},
+  components: {CrazyMultipleSelect, DatePicker, RadioGroup},
 
   data: () => ({
     test_utils,
@@ -69,6 +71,7 @@ export default {
       questions_number: '',
       finish_date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
       execution_time: null,
+      questions: []
     }
   }),
 
@@ -92,7 +95,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['getTestTypes', 'getCommonQuestionCategories', 'getAuthoredQuestionCategories']),
+    ...mapGetters(['getTestTypes', 'getCommonQuestionCategories', 'getAuthoredQuestionCategories', 'getQuestions']),
   },
 }
 </script>
