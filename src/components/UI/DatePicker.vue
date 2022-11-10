@@ -13,6 +13,7 @@
         <v-text-field
             :value="value"
             @input="$emit('input', $event.target.value)"
+            prepend-icon="mdi-calendar"
             readonly
             solo
             v-bind="attrs"

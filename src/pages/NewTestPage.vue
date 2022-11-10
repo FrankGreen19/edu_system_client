@@ -36,13 +36,12 @@
               label="Время на выполнение (в минутах)"
               hint="Время на выполнение (в минутах)"
               v-model="test.execution_time"/>
+          <div v-if="test.test_type_id === test_utils.test_types.custom">
+            <CrazyMultipleSelect v-model="test.questions" :items="getQuestions" label="Выберете вопросы для теста"/>
+          </div>
         </v-card-text>
-        <div v-if="test.test_type_id === test_utils.test_types.custom">
-          <CrazyMultipleSelect v-model="test.questions" :items="getQuestions"/>
-        </div>
       </v-card>
     </v-col>
-    <br><br><br><br><br>
   </v-row>
 </template>
 

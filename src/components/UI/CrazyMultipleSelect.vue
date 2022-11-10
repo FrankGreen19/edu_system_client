@@ -5,8 +5,11 @@
       :items="items"
       item-text="description"
       item-value="id"
-      label="Favorite Fruits"
+      :label="label"
+      :hint="label"
       multiple
+      solo
+      color="blue lighten-1"
   >
     <template v-slot:prepend-item>
       <v-list-item
@@ -15,48 +18,26 @@
           @click="toggle"
       >
         <v-list-item-action>
-          <v-icon :color="value.length > 0 ? 'indigo darken-4' : ''">
+          <v-icon :color="value.length > 0 ? 'orange' : ''">
             {{ icon }}
           </v-icon>
         </v-list-item-action>
         <v-list-item-content>
           <v-list-item-title>
-            Select All
+            Выбрать все
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-      <v-divider class="mt-2"></v-divider>
     </template>
     <template v-slot:append-item>
       <v-divider class="mb-2"></v-divider>
       <v-list-item disabled>
-        <v-list-item-avatar color="grey lighten-3">
-          <v-icon>
-            mdi-food-apple
-          </v-icon>
-        </v-list-item-avatar>
-
-        <v-list-item-content v-if="needsAllItems">
+        <v-list-item-content v-if="needsSomeItem">
           <v-list-item-title>
-            Holy smokes, someone call the fruit police!
-          </v-list-item-title>
-        </v-list-item-content>
-
-        <v-list-item-content v-else-if="needsSomeItem">
-          <v-list-item-title>
-            Fruit Count
+            Выбрано опций
           </v-list-item-title>
           <v-list-item-subtitle>
             {{ value.length }}
-          </v-list-item-subtitle>
-        </v-list-item-content>
-
-        <v-list-item-content v-else>
-          <v-list-item-title>
-            How could you not like fruit?
-          </v-list-item-title>
-          <v-list-item-subtitle>
-            Go ahead, make a selection above!
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
@@ -75,6 +56,10 @@ export default {
     },
     items: {
       type: Array,
+      required: true
+    },
+    label: {
+      type: String,
       required: true
     }
   },
