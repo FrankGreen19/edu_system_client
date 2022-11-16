@@ -36,7 +36,7 @@ DefaultApiInstance.interceptors.response.use(
             store.dispatch('refresh')
                 .then(() => {
                     originalRequest.headers['Authorization'] = localStorage.getItem('token');
-                    return DefaultApiInstance.request(originalRequest);
+                    return DefaultApiInstance.request(originalRequest).catch(response => console.log(response.data.message));
                 })
                 .catch(() => {
                     store.dispatch('logout');
