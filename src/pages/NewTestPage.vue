@@ -10,7 +10,7 @@
               v-model="test.title"/>
           <RadioGroup :items="test_utils.question_categories_radios" title="Из какой категории будем брать вопросы?"
                       v-model="question_category_radio"/>
-          <RadioGroup :items="getTestTypes" title="Как будем создавать тест?" v-model="test.test_type_id"/>
+          <RadioGroup :items="getTestTypes" title="Как будем создавать тест?" v-model="test.testTypeId"/>
           <div v-if="question_category_radio !== 0">
             <v-select
                 :items="getQuestionCategoriesByRadioValue()"
@@ -19,24 +19,26 @@
                 item-text="title"
                 item-value="id"
                 solo
-                v-model="question_category_id"
-                @change="fetchQuestionsByCategory({question_category_id})"
+                v-model="test.questionCategoryId"
+                @change="fetchQuestionsByCategory(test.questionCategoryId)"
             ></v-select>
           </div>
-          <div v-if="test.test_type_id === test_utils.test_types.generated">
+          <div v-if="test.testTypeId === test_utils.test_types.generated">
             <v-text-field
                 solo
                 label="Количество вопросов"
                 hint="Количество вопросов"
-                v-model="test.questions_number"/>
+                type="number"
+                v-model="test.questionsNumber"/>
           </div>
-          <DatePicker title="Дедлайн" v-model="test.finish_date"/>
+          <DatePicker title="Дедлайн" v-model="test.finishDate"/>
           <v-text-field
               solo
               label="Время на выполнение (в минутах)"
               hint="Время на выполнение (в минутах)"
-              v-model="test.execution_time"/>
-          <div v-if="test.test_type_id === test_utils.test_types.custom">
+              type="number"
+              v-model="test.executionTime"/>
+          <div v-if="test.testTypeId === test_utils.test_types.custom">
             <CrazyMultipleSelect v-model="test.questions" :items="getQuestions" label="Выберете вопросы для теста"/>
           </div>
 
@@ -46,6 +48,7 @@
                 dark
                 rounded
                 value="Создать"
+                @click="createNewTest(test)"
                 color="orange">
               Создать
             </v-btn>
@@ -71,16 +74,15 @@ export default {
   data: () => ({
     test_utils,
     question_category_radio: 0,
-    question_category_id: null,
     test_type_generated: 18,
     test_type_custom: 17,
     test: {
-      test_type_id: 0,
-      test_theme: '',
+      questionCategoryId: 0,
+      testTypeId: 0,
       title: '',
-      questions_number: '',
-      finish_date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-      execution_time: null,
+      questionsNumber: 0,
+      finishDate: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+      executionTime: 0,
       questions: []
     }
   }),
@@ -91,7 +93,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['fetchTestTypes', 'fetchQuestionCategories', 'fetchQuestionsByCategory']),
+    ...mapActions(['fetchTestTypes', 'fetchQuestionCategories', 'fetchQuestionsByCategory', 'createNewTest']),
 
     getQuestionCategoriesByRadioValue()
     {

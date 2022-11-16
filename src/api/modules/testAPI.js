@@ -16,5 +16,10 @@ export const testAPI = {
         return DefaultApiInstance.post('/question', {
             questionCategoryId: catId
         });
+    },
+
+    postNewTest(testData)
+    {
+        return DefaultApiInstance.post('/test', testData);
     }
 }

@@ -30,8 +30,9 @@ DefaultApiInstance.interceptors.response.use(
     async (error) => {
         let originalRequest = error.config;
         originalRequest._isRetry = true;
+        console.log(error)
 
-        if (error.code === 'ERR_BAD_REQUEST') {
+        if (error.response.status === 401) {
             store.dispatch('refresh')
                 .then(() => {
                     originalRequest.headers['Authorization'] = localStorage.getItem('token');

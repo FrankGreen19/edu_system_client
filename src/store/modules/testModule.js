@@ -8,6 +8,7 @@ export default {
             authored: [],
         },
         questions: [],
+        tests: [],
     },
 
     mutations: {
@@ -26,8 +27,14 @@ export default {
             state.questionCategories.authored = cats;
         },
 
-        setQuestions(state, questions) {
+        setQuestions(state, questions)
+        {
             state.questions = questions;
+        },
+
+        pushTest(state, test)
+        {
+            state.tests.push(test);
         }
     },
 
@@ -72,11 +79,18 @@ export default {
             })
         },
 
-        fetchQuestionsByCategory({commit}, {question_category_id})
+        fetchQuestionsByCategory({commit}, question_category_id)
         {
             return testAPI.getQuestionsByCategoryId(question_category_id).then((response) => {
                 commit('setQuestions', response.data.questionResources);
-            })
+            });
+        },
+
+        createNewTest({commit}, test)
+        {
+            return testAPI.postNewTest(test).then((response) => {
+                commit('pushTest', response.data.testResource);
+            });
         }
     }
 }
