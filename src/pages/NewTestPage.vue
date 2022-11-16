@@ -80,7 +80,7 @@ export default {
       questionCategoryId: 0,
       testTypeId: 0,
       title: '',
-      questionsNumber: 0,
+      questionsNumber: '',
       finishDate: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
       executionTime: 0,
       questions: []
