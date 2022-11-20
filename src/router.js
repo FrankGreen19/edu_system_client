@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import LoginPage from "@/pages/LoginPage";
 import MainPage from "@/pages/MainPage";
 import NewTestPage from "@/pages/NewTestPage";
+import TestsPage from "@/pages/TestsPage";
 
 Vue.use(VueRouter)
 
@@ -43,6 +44,13 @@ let router = new VueRouter({
         {
             path: '/new-test',
             component: NewTestPage,
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/authored-tests',
+            component: TestsPage,
             meta: {
                 requiresAuth: true
             }

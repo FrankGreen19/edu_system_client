@@ -7,4 +7,17 @@ export const test_utils = {
         {id: 1, title: 'Общая'},
         {id: 2, title: 'Собственная'}
     ],
+
+    toTestFormat(test)
+    {
+        test.testTypeId = test.testType.id;
+        test.questionCategoryId = test.questionCategory.id;
+        test.questionsNumber = Number(test.questionsNumber);
+        test.executionTime = Number(test.executionTime);
+
+        delete test.testType;
+        delete test.questionCategory;
+
+        return test;
+    },
 }

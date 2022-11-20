@@ -1,4 +1,5 @@
 import {DefaultApiInstance} from "@/api";
+import {test_utils} from "@/utils/testUtils";
 
 export const testAPI = {
     getTestTypes()
@@ -21,5 +22,16 @@ export const testAPI = {
     postNewTest(testData)
     {
         return DefaultApiInstance.post('/test', testData);
+    },
+
+    getTestsByAuthor()
+    {
+        return DefaultApiInstance.get('/test/authored');
+    },
+
+    updateTest(test)
+    {
+        test = test_utils.toTestFormat(test);
+        return DefaultApiInstance.put('/test', {...test});
     }
 }

@@ -1,4 +1,5 @@
 import {testAPI} from "@/api/modules/testAPI";
+import router from "@/router";
 
 export default {
     state: {
@@ -8,7 +9,7 @@ export default {
             authored: [],
         },
         questions: [],
-        tests: [],
+        tests: new Map(),
     },
 
     mutations: {
@@ -34,8 +35,8 @@ export default {
 
         pushTest(state, test)
         {
-            state.tests.push(test);
-        }
+            state.tests.set(test.id, test);
+        },
     },
 
     getters: {
@@ -57,7 +58,12 @@ export default {
         getQuestions(state)
         {
             return state.questions;
-        }
+        },
+
+        getTests(state)
+        {
+            return state.tests;
+        },
     },
 
     actions: {
@@ -90,7 +96,29 @@ export default {
         {
             return testAPI.postNewTest(test).then((response) => {
                 commit('pushTest', response.data.testResource);
+                router.push('/authored-tests')
             });
-        }
+        },
+
+        fetchTestsByAuthor({commit})
+        {
+            return testAPI.getTestsByAuthor()
+                .then((response) => {
+                    response.data.testResources.forEach(test => {
+                        commit("pushTest", test)
+                    });
+                });
+        },
+
+        putTest({commit}, test)
+        {
+            return testAPI.updateTest(test)
+                .then((res) => {
+                    commit('pushTest', res.data.testResource);
+                })
+                .catch((res) => {
+                    console.log(res.data);
+                })
+        },
     }
 }
