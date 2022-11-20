@@ -115,9 +115,12 @@ export default {
             return testAPI.updateTest(test)
                 .then((res) => {
                     commit('pushTest', res.data.testResource);
+
+                    return res.data.testResource;
                 })
                 .catch((res) => {
                     console.log(res.data);
+                    return null;
                 })
         },
     }

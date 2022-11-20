@@ -87,7 +87,11 @@ export default {
     updateTest()
     {
       this.putTest(this.testInfo)
-        .then(() => {this.editMode = false});
+        .then((res) => {
+          if (res) {
+            this.testInfo = res;
+          }
+        });
       this.testInfo = {};
     }
   },
