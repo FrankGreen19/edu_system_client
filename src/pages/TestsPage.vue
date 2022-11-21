@@ -38,6 +38,7 @@
           </div>
         </v-card-text>
         <v-card-actions v-if="testInfo.id">
+          <v-spacer></v-spacer>
           <v-btn v-if="editMode" dark small color="green lighten-1" @click="updateTest">Сохранить</v-btn>
           <v-btn v-else dark small color="orange" @click="editMode = true">Редактировать</v-btn>
           <v-btn dark small color="red lighten-1">Удалить</v-btn>
