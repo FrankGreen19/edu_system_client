@@ -33,5 +33,10 @@ export const testAPI = {
     {
         test = test_utils.toTestFormat(test);
         return DefaultApiInstance.put('/test', {...test});
-    }
+    },
+
+    getTestByCode(code)
+    {
+        return DefaultApiInstance.get(`/test/test-by-code/${code}`);
+    },
 }

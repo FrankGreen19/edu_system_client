@@ -10,6 +10,7 @@ export default {
         },
         questions: [],
         tests: new Map(),
+        testToPass: {},
     },
 
     mutations: {
@@ -36,6 +37,11 @@ export default {
         pushTest(state, test)
         {
             state.tests.set(test.id, test);
+        },
+
+        setTestToPass(state, test)
+        {
+            state.testToPass = test;
         },
     },
 
@@ -64,6 +70,11 @@ export default {
         {
             return state.tests;
         },
+
+        getTestToPass(state)
+        {
+            return state.testToPass;
+        }
     },
 
     actions: {
@@ -123,5 +134,18 @@ export default {
                     return null;
                 })
         },
+
+        fetchTestByCode({commit}, code)
+        {
+            return testAPI.getTestByCode(code)
+                .then((res) => {
+                    commit('setTestToPass', res.data.testResource);
+
+                    router.push('/pass-test')
+                })
+                .catch((res) => {
+                    console.log(res.data);
+                })
+        }
     }
 }
