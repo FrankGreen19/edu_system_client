@@ -19,11 +19,11 @@ export default {
     FooterBlock,
   },
 
-  mounted() {
-    // if (localStorage.getItem('token') && this.$store.getters.getUser == null) {
-    //   console.log('yes')
-    //   this.$store.dispatch('fetchUser');
-    // }
+  mounted()
+  {
+    if (localStorage.getItem('token') && this.$store.getters.getUser == null) {
+      this.$store.dispatch('fetchUser');
+    }
   }
 }
 </script>
