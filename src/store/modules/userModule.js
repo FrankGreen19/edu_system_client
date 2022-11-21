@@ -37,7 +37,7 @@ export default {
         {
             return userAPI.getUser().then((response) => {
                 console.log(response.data)
-                commit('setUser', response.data.user);
+                commit('setUser', response.data.user.userResource);
                 commit('setAuthenticated', true);
             })
         },
