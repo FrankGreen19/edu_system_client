@@ -12,6 +12,7 @@ export default {
         tests: new Map(),
         testToPass: {},
         userTest: {},
+        testQuestionAnswers: [],
     },
 
     mutations: {
@@ -48,7 +49,17 @@ export default {
         setUserTest(state, test)
         {
             state.userTest = test;
-        }
+        },
+
+        pushQuestionAnswer(state, answer)
+        {
+            state.testQuestionAnswers.push(answer);
+        },
+
+        setTestQuestionAnswers(state, answers)
+        {
+            state.testQuestionAnswers = answers;
+        },
     },
 
     getters: {
@@ -86,6 +97,11 @@ export default {
         {
             return state.userTest;
         },
+
+        getTestQuestionAnswers(state)
+        {
+            return state.testQuestionAnswers;
+        }
     },
 
     actions: {
@@ -167,9 +183,23 @@ export default {
                 });
         },
 
-        createQuestionAnswer(answer)
+        updateUserTest({commit}, test)
         {
-            return testAPI.postQuestionAnswer(answer);
+          return testAPI.putUserTest(test)
+              .then((res) => {
+                  commit('setUserTest', res.data.userTestResource);
+              })
+        },
+
+        createQuestionAnswer({commit}, answer)
+        {
+            return testAPI.postQuestionAnswer(answer)
+                .then((res) => {
+                    commit('pushQuestionAnswer', res.data.userQuestionAnswerResource);
+                })
+                .catch((res) => {
+                    console.error(res);
+                });
         },
     }
 }

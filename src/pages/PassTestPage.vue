@@ -1,8 +1,8 @@
 <template>
   <v-row>
     <v-col cols="6" class="mx-auto">
-      <v-card>
-        <v-card-text>
+      <v-card v-if="!testEnded">
+        <v-card-text v-if="!testEnded">
           <h3 style="color: #1976D2">{{ currentQuestion.description }}</h3>
           <v-text-field class="mt-4"
             solo dense
@@ -20,21 +20,42 @@
           </v-btn>
         </v-card-actions>
       </v-card>
+      <v-card v-else class="text-md-center">
+        <v-card-text class="mx-auto">
+          <p class="text-h4" style="color: #1976D2">Тест завершен</p>
+          <AnswerItem
+              v-for="answer in getTestQuestionAnswers"
+              :key="answer.id"
+              :answer="answer"
+          />
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="orange lighten-1"
+                 right
+                 dark small
+                 @click="$router.push('/')"
+          >
+            На главную страницу
+          </v-btn>
+        </v-card-actions>
+      </v-card>
     </v-col>
   </v-row>
 </template>
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-import {testAPI} from "@/api/modules/testAPI";
+import AnswerItem from "@/components/AnswerItem";
 
 export default {
   name: "PassTestPage",
-
+  components: {AnswerItem},
   data: () => ({
     currentQuestion: {},
     answer: '',
     currentQuestionIdx: null,
+    testEnded: false,
   }),
 
   mounted() {
@@ -47,11 +68,11 @@ export default {
   },
 
   methods: {
-    ...mapActions(['createUserTest']),
+    ...mapActions(['createUserTest', 'createQuestionAnswer']),
 
     showNextQuestion()
     {
-      testAPI.postQuestionAnswer({
+      this.createQuestionAnswer({
         userTestId: this.getUserTest.id,
         questionId: this.currentQuestion.questionId,
         answer: this.answer,
@@ -61,6 +82,8 @@ export default {
         this.currentQuestionIdx++;
         if (this.currentQuestionIdx < this.getTestToPass.questions.length) {
           this.currentQuestion = this.getTestToPass.questions[this.currentQuestionIdx];
+        } else {
+          this.testEnded = true;
         }
       });
     },
@@ -68,7 +91,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['getTestToPass', 'getUser', 'getTestToPass', 'getUserTest'])
+    ...mapGetters(['getTestToPass', 'getUser', 'getTestToPass', 'getUserTest', 'getTestQuestionAnswers'])
   }
 }
 </script>
