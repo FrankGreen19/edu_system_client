@@ -39,4 +39,14 @@ export const testAPI = {
     {
         return DefaultApiInstance.get(`/test/test-by-code/${code}`);
     },
+
+    postUserTest(user)
+    {
+        return DefaultApiInstance.post('/user/test', user);
+    },
+
+    postQuestionAnswer(answer)
+    {
+        return DefaultApiInstance.post('/user/question/answer', answer);
+    }
 }
