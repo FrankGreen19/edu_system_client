@@ -13,6 +13,7 @@ export default {
         testToPass: {},
         userTest: {},
         testQuestionAnswers: [],
+        userTests: [],
     },
 
     mutations: {
@@ -60,6 +61,16 @@ export default {
         {
             state.testQuestionAnswers = answers;
         },
+
+        pushUserTest(state, test)
+        {
+            state.userTests.push(test);
+        },
+
+        setUserTests(state, tests)
+        {
+            state.userTests = tests;
+        }
     },
 
     getters: {
@@ -101,7 +112,12 @@ export default {
         getTestQuestionAnswers(state)
         {
             return state.testQuestionAnswers;
-        }
+        },
+
+        getUserTests(state)
+        {
+            return state.userTests;
+        },
     },
 
     actions: {
@@ -202,5 +218,13 @@ export default {
                     console.error(res);
                 });
         },
+
+        fetchUsersTests({commit})
+        {
+            return testAPI.getUserTests()
+                .then((res) => {
+                    commit('setUserTests', res.data.userTestsResources);
+                })
+        }
     }
 }

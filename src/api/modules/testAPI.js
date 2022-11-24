@@ -54,4 +54,9 @@ export const testAPI = {
     {
         return DefaultApiInstance.post('/user/question/answer', answer);
     },
+
+    getUserTests()
+    {
+        return DefaultApiInstance.get('/user/test');
+    }
 }
