@@ -28,6 +28,8 @@
               :key="answer.id"
               :answer="answer"
           />
+          <br><br>
+          <h3 style="color: #1976D2">Результат: {{ getUserTest.result }}%</h3>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -45,7 +47,7 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapMutations} from "vuex";
 import AnswerItem from "@/components/AnswerItem";
 
 export default {
@@ -65,10 +67,12 @@ export default {
     });
     this.currentQuestion = this.getTestToPass.questions[0];
     this.currentQuestionIdx = 0;
+    this.setTestQuestionAnswers([]);
   },
 
   methods: {
-    ...mapActions(['createUserTest', 'createQuestionAnswer']),
+    ...mapActions(['createUserTest', 'createQuestionAnswer', 'updateUserTest']),
+    ...mapMutations(['setTestQuestionAnswers']),
 
     showNextQuestion()
     {
@@ -83,7 +87,10 @@ export default {
         if (this.currentQuestionIdx < this.getTestToPass.questions.length) {
           this.currentQuestion = this.getTestToPass.questions[this.currentQuestionIdx];
         } else {
-          this.testEnded = true;
+          this.updateUserTest(this.getUserTest)
+            .then(() => {
+              this.testEnded = true;
+            });
         }
       });
     },
