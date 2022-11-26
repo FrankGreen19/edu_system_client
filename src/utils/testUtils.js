@@ -10,13 +10,18 @@ export const test_utils = {
 
     toTestFormat(test)
     {
-        test.testTypeId = test.testType.id;
-        test.questionCategoryId = test.questionCategory.id;
+        if (test.testType && Object.keys(test.testType).length !== 0 && test.testType.constructor === Object) {
+            test.testTypeId = test.testType.id;
+            delete test.testType;
+        }
+
+        if (test.questionCategory && Object.keys(test.questionCategory).length !== 0 && test.questionCategory.constructor === Object) {
+            test.questionCategoryId = test.questionCategory.id;
+            delete test.questionCategory;
+        }
+
         test.questionsNumber = Number(test.questionsNumber);
         test.executionTime = Number(test.executionTime);
-
-        delete test.testType;
-        delete test.questionCategory;
 
         return test;
     },

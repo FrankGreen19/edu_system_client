@@ -21,6 +21,7 @@ export const testAPI = {
 
     postNewTest(testData)
     {
+        testData = test_utils.toTestFormat(testData);
         return DefaultApiInstance.post('/test', testData);
     },
 
