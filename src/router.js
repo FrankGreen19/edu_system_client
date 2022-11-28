@@ -6,6 +6,7 @@ import NewTestPage from "@/pages/NewTestPage";
 import TestsPage from "@/pages/TestsPage";
 import PassTestPage from "@/pages/PassTestPage";
 import PupilTestsPage from "@/pages/PupilTestsPage";
+import CategoryPage from "@/pages/CategoryPage";
 
 Vue.use(VueRouter)
 
@@ -67,6 +68,13 @@ let router = new VueRouter({
         {
             path: '/passed-tests',
             component: PupilTestsPage,
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/categories',
+            component: CategoryPage,
             meta: {
                 requiresAuth: true
             }
