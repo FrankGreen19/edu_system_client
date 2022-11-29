@@ -59,5 +59,13 @@ export const testAPI = {
     getUserTests()
     {
         return DefaultApiInstance.get('/user/test');
-    }
+    },
+
+    postQuestionCategory(test)
+    {
+        return DefaultApiInstance.post('/question-category', {
+            title: test.title,
+            questions: test.questions,
+        });
+    },
 }

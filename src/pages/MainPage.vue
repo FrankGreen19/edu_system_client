@@ -1,6 +1,10 @@
 <template>
   <div class="pb-10">
-    <v-btn class="mt-3" v-if="isTeacher()" dark color="orange lighten-1" @click="$router.push('/new-test')">Создать тест</v-btn>
+    <div v-if="isTeacher()">
+      <v-btn class="mt-3" dark color="orange lighten-1" @click="$router.push('/categories')">Категории</v-btn>
+      <br>
+      <v-btn class="mt-3" dark color="orange lighten-1" @click="$router.push('/new-test')">Создать тест</v-btn>
+    </div>
     <div v-else>
       <SendCodeComponent />
       <v-btn class="mt-3" dark color="orange lighten-1" @click="$router.push('/passed-tests')">Пройденные тесты</v-btn>

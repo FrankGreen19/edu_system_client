@@ -70,6 +70,11 @@ export default {
         setUserTests(state, tests)
         {
             state.userTests = tests;
+        },
+
+        pushAuthoredQuestionCategory(state, cat)
+        {
+            state.questionCategories.authored.push(cat);
         }
     },
 
@@ -225,6 +230,14 @@ export default {
                 .then((res) => {
                     commit('setUserTests', res.data.userTestsResources);
                 })
+        },
+
+        addQuestionCategory({commit}, test)
+        {
+            return testAPI.postQuestionCategory(test)
+                .then((res) => {
+                    commit('pushAuthoredQuestionCategory', res.data.questionCategoryResource);
+                });
         }
     }
 }

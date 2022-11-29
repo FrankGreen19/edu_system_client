@@ -6,7 +6,7 @@
         <v-card>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn dark small color="orange lighten-1">Создать новую категорию с вопросами</v-btn>
+            <v-btn dark small color="orange lighten-1" @click="$router.push('/new-category')">Создать новую категорию с вопросами</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>

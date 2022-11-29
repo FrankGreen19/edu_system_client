@@ -34,12 +34,12 @@ DefaultApiInstance.interceptors.response.use(
 
         if (error.response.status === 401) {
             store.dispatch('refresh')
-                .catch(() => {
-                    store.dispatch('logout');
-                })
                 .then(() => {
                     originalRequest.headers['Authorization'] = localStorage.getItem('token');
                     return DefaultApiInstance.request(originalRequest).catch(response => console.log(response.data.message));
+                })
+                .catch(() => {
+                    store.dispatch('logout');
                 })
         }
 

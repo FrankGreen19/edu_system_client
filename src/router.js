@@ -7,6 +7,7 @@ import TestsPage from "@/pages/TestsPage";
 import PassTestPage from "@/pages/PassTestPage";
 import PupilTestsPage from "@/pages/PupilTestsPage";
 import CategoryPage from "@/pages/CategoryPage";
+import NewCategoryPage from "@/pages/NewCategoryPage";
 
 Vue.use(VueRouter)
 
@@ -75,6 +76,13 @@ let router = new VueRouter({
         {
             path: '/categories',
             component: CategoryPage,
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/new-category',
+            component: NewCategoryPage,
             meta: {
                 requiresAuth: true
             }
