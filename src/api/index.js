@@ -22,6 +22,13 @@ const loginConfig = {
 const DefaultApiInstance = axios.create(defaultConfig);
 const LoginApiInstance = axios.create(loginConfig);
 
+DefaultApiInstance.interceptors.request.use(
+    (config) => {
+            store.commit('setErrors', []);
+            return config;
+        },
+);
+
 DefaultApiInstance.interceptors.response.use(
      (response) => {
         // Любой код состояния, находящийся в диапазоне 2xx, вызывает срабатывание этой функции
@@ -41,6 +48,8 @@ DefaultApiInstance.interceptors.response.use(
                 .catch(() => {
                     store.dispatch('logout');
                 })
+        } else {
+            store.commit('setErrors', error.response.data.violations);
         }
 
         return Promise.reject(error);

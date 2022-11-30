@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar rounded class="mb-5">
+  <v-app-bar rounded class="mb-3">
     <v-toolbar-title @click="$router.push('/')">
       <span style="color: #1976D2">Сайтик с тестиками</span>
     </v-toolbar-title>

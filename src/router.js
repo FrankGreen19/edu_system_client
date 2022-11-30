@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import store from "/src/store"
 import VueRouter from 'vue-router'
 import LoginPage from "@/pages/LoginPage";
 import MainPage from "@/pages/MainPage";
@@ -92,6 +93,7 @@ let router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
+        store.commit('setErrors', []);
         if (localStorage.getItem('token') == null) {
             next({
                 path: '/login',
