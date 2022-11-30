@@ -208,7 +208,6 @@ export default {
         {
           return testAPI.putUserTest(test)
               .then((res) => {
-                  commit('setTestQuestionAnswers', []);
                   commit('setUserTest', res.data.userTestResource);
               })
         },

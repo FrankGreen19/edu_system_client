@@ -12,7 +12,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="orange lighten-1"
+          <v-btn v-if="!testEnded" color="orange lighten-1"
                  dark small
                  @click="showNextQuestion()"
           >
