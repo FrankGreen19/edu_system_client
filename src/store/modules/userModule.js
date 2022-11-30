@@ -1,4 +1,5 @@
 import {userAPI} from "@/api/modules/userAPI";
+import router from "@/router";
 
 export default {
     state: {
@@ -8,7 +9,8 @@ export default {
     }, //данные
     mutations: {
         setUser(state, payload) {
-            state.user = payload
+            state.user = payload;
+            localStorage.setItem('username', payload.full_name);
         },
 
         setAuthenticated(state, payload) {
@@ -33,13 +35,17 @@ export default {
         }
     }, // аналоги computed свойств
     actions: {
-        fetchUser({commit})
+        fetchUser(store)
         {
-            return userAPI.getUser().then((response) => {
-                console.log(response.data)
-                commit('setUser', response.data.user.userResource);
-                commit('setAuthenticated', true);
-            })
+            return userAPI.getUser().then((res) => {
+                    return store.commit('setUser', res.data.user.userResource)
+                })
+                .then(() => {
+                    localStorage.setItem('roles', JSON.stringify(store.getters.getUser.roles));
+
+                    return store.commit('setAuthenticated', true);
+                })
+                .then(() => {router.push('/')});
         },
     }, // функции, работающие с апи
 }

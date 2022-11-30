@@ -1,5 +1,4 @@
 import {authAPI} from "@/api/modules/authAPI";
-import router from "@/router";
 import {DefaultApiInstance} from "@/api";
 
 const getDefaultState = () => {
@@ -31,7 +30,6 @@ export default {
                 .then((response) => {
                     commit('setToken', response.data.token);
                     DefaultApiInstance.defaults.headers['Authorization'] = `Bearer ${response.data.token}`;
-                    router.push('/');
                 })
         },
 

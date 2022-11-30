@@ -21,12 +21,5 @@ export default {
     HeaderBlock,
     FooterBlock,
   },
-
-  mounted()
-  {
-    if (localStorage.getItem('token') && this.$store.getters.getUser == null) {
-      this.$store.dispatch('fetchUser');
-    }
-  }
 }
 </script>
