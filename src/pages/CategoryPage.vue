@@ -17,7 +17,7 @@
       <v-col cols="4">
         <v-data-table
             :headers="headers"
-            :items="categories"
+            :items="getAuthoredQuestionCategories"
             :items-per-page="50"
             class="elevation-1"
             @click:row="showCategoryInfo"
@@ -67,15 +67,11 @@ export default {
   data: () => ({
     categoryInfo: {},
     headers: [{text: 'Выберете категорию', align: 'center', sortable: false, value: 'title'}],
-    categories: [],
     editMode: false,
   }),
 
-  created() {
-    this.fetchQuestionCategories()
-        .then(() => {
-          this.categories = this.getAuthoredQuestionCategories;
-        });
+  mounted() {
+    this.fetchQuestionCategories();
   },
 
   methods: {
