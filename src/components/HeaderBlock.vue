@@ -5,19 +5,23 @@
     </v-toolbar-title>
     <v-spacer />
     <v-btn class="mr-2 white--text" rounded color="orange lighten-1" @click="$router.push('login')">
-      {{ buttonText }}
+      {{ username }}
     </v-btn>
   </v-app-bar>
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
   name: 'NavbarBlock',
-
+  
   computed: {
-    buttonText() {
-      return localStorage.getItem('username') ? localStorage.getItem('username') : 'Войти';
-    }
+    ...mapGetters(['getUser']),
+
+    username() {
+      return this.getUser?.full_name ? this.getUser.full_name : 'Войти';
+    },
   }
 }
 </script>

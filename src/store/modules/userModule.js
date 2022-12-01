@@ -10,7 +10,6 @@ export default {
     mutations: {
         setUser(state, payload) {
             state.user = payload;
-            localStorage.setItem('username', payload.full_name);
         },
 
         setAuthenticated(state, payload) {
@@ -45,7 +44,9 @@ export default {
 
                     return store.commit('setAuthenticated', true);
                 })
-                .then(() => {router.push('/')});
+                .then(() => {
+                    router.push('/').catch(() => {});
+                });
         },
     }, // функции, работающие с апи
 }

@@ -18,6 +18,14 @@ import ErrorsBlock from "@/components/ErrorsBlock";
 import LoaderBlock from "@/components/LoaderBlock";
 export default {
   name: 'App',
+
+  mounted()
+  {
+    if (localStorage.getItem('token') && this.$store.getters.getUser == null) {
+      this.$store.dispatch('fetchUser');
+    }
+  },
+
   components: {
     LoaderBlock,
     ErrorsBlock,
