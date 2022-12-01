@@ -22,9 +22,36 @@ const loginConfig = {
 const DefaultApiInstance = axios.create(defaultConfig);
 const LoginApiInstance = axios.create(loginConfig);
 
+LoginApiInstance.interceptors.request.use(
+    (config) => {
+        store.commit('setErrors', []);
+        store.commit('setLoaderVisible', true);
+
+        return config;
+    },
+);
+
+LoginApiInstance.interceptors.response.use(
+    (response) => {
+        // Любой код состояния, находящийся в диапазоне 2xx, вызывает срабатывание этой функции
+        store.commit('setLoaderVisible', false);
+
+        return response;
+    },
+    async (error) => {
+        store.commit('setLoaderVisible', false);
+
+        store.commit('setErrors', error.response.data.violations);
+
+        return Promise.reject(error);
+    }
+);
+
 DefaultApiInstance.interceptors.request.use(
     (config) => {
             store.commit('setErrors', []);
+            store.commit('setLoaderVisible', true);
+
             return config;
         },
 );
@@ -32,12 +59,15 @@ DefaultApiInstance.interceptors.request.use(
 DefaultApiInstance.interceptors.response.use(
      (response) => {
         // Любой код состояния, находящийся в диапазоне 2xx, вызывает срабатывание этой функции
-        return response;
+         store.commit('setLoaderVisible', false);
+
+         return response;
     },
     async (error) => {
+        store.commit('setLoaderVisible', false);
+
         let originalRequest = error.config;
         originalRequest._isRetry = true;
-        console.log(error)
 
         if (error.response.status === 401) {
             store.dispatch('refresh')
