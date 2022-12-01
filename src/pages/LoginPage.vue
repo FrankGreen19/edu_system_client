@@ -54,6 +54,9 @@ export default {
         password: this.password
       }).then(() => {
         this.fetchUser()
+            .then(() => {
+              this.$router.push('/').catch(() => {});
+            });
       })
     }
   }

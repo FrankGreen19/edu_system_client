@@ -1,5 +1,4 @@
 import {userAPI} from "@/api/modules/userAPI";
-import router from "@/router";
 
 export default {
     state: {
@@ -43,9 +42,6 @@ export default {
                     localStorage.setItem('roles', JSON.stringify(store.getters.getUser.roles));
 
                     return store.commit('setAuthenticated', true);
-                })
-                .then(() => {
-                    router.push('/').catch(() => {});
                 });
         },
     }, // функции, работающие с апи
